@@ -84,6 +84,28 @@ function executeCommand(command) {
     case 'exit':
       exitTerminal();
       break;
+    // Additional simulated commands
+    case 'date':
+      showDate();
+      break;
+    case 'time':
+      showTime();
+      break;
+    case 'calc':
+      calculate(args.slice(1).join(' '));
+      break;
+    case 'whoami':
+      showUserInfo();
+      break;
+    case 'systeminfo':
+      showSystemInfo();
+      break;
+    case 'tree':
+      displayTree(args.slice(1));
+      break;
+    case 'find':
+      searchFiles(args.slice(1));
+      break;
     default:
       output.innerHTML += '<div>Command not recognized</div>';
   }
@@ -114,7 +136,7 @@ function clearScreen() {
 }
 
 function showHelp() {
-  output.innerHTML += '<div>Available commands:<br>dir - List directory contents<br>cd - Change directory<br>echo - Display text<br>cls - Clear screen<br>help - Display help information<br>ipconfig - Show IP configuration<br>ping - Ping a remote host<br>mkdir - Create a directory<br>rmdir - Remove a directory<br>del - Delete a file<br>type - Display the contents of a text file<br>copy - Copy a file<br>move - Move a file<br>ren - Rename a file<br>attrib - Change file attributes<br>start - Start a process<br>tasklist - List running processes<br>taskkill - Terminate a process<br>shutdown - Shut down the system<br>exit - Exit the terminal</div>';
+  output.innerHTML += '<div>Available commands:<br>dir - List directory contents<br>cd - Change directory<br>echo - Display text<br>cls - Clear screen<br>help - Display help information<br>ipconfig - Show IP configuration<br>ping - Ping a remote host<br>mkdir - Create a directory<br>rmdir - Remove a directory<br>del - Delete a file<br>type - Display the contents of a text file<br>copy - Copy a file<br>move - Move a file<br>ren - Rename a file<br>attrib - Change file attributes<br>start - Start a process<br>tasklist - List running processes<br>taskkill - Terminate a process<br>shutdown - Shut down the system<br>exit - Exit the terminal<br>date - Display current date<br>time - Display current time<br>calc - Basic calculator<br>whoami - Display current user information<br>systeminfo - Display system information<br>tree - Display directory tree structure<br>find - Search for files</div>';
 }
 
 function showIpConfig() {
@@ -240,5 +262,51 @@ function exitTerminal() {
   // Simulate exiting terminal
   setTimeout(function() {
     output.innerHTML += '<div>Terminal exited</div>';
+  }, 1000);
+}
+
+// Additional simulated commands
+function showDate() {
+  const currentDate = new Date().toLocaleDateString();
+  output.innerHTML += '<div>' + currentDate + '</div>';
+}
+
+function showTime() {
+  const currentTime = new Date().toLocaleTimeString();
+  output.innerHTML += '<div>' + currentTime + '</div>';
+}
+
+function calculate(expression) {
+  try {
+    const result = eval(expression);
+    output.innerHTML += '<div>' + expression + ' = ' + result + '</div>';
+  } catch (error) {
+    output.innerHTML += '<div>Error: ' + error.message + '</div>';
+  }
+}
+
+function showUserInfo() {
+  output.innerHTML += '<div>Current user: John Doe</div>';
+}
+
+function showSystemInfo() {
+  output.innerHTML += '<div>System Information<br>OS: Windows 10<br>Processor: Intel Core i7<br>Memory: 16GB</div>';
+}
+
+function displayTree(args) {
+  const directory = args[0] || '/';
+  output.innerHTML += '<div>Displaying directory tree structure for ' + directory + '...</div>';
+  // Simulate displaying directory tree
+  setTimeout(function() {
+    output.innerHTML += '<div>Directory tree structure:<br>|---Folder1<br>|------File1.txt<br>|------File2.txt<br>|---Folder2<br>|------File3.txt</div>';
+  }, 1000);
+}
+
+function searchFiles(args) {
+  const keyword = args[0];
+  output.innerHTML += '<div>Searching for files containing \'' + keyword + '\'...</div>';
+  // Simulate searching files
+  setTimeout(function() {
+    output.innerHTML += '<div>Search results:<br>File1.txt<br>Folder1/File2.txt</div>';
   }, 1000);
 }
