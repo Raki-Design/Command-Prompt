@@ -176,7 +176,7 @@
                         output.innerHTML += document.getElementById('command').value.toLowerCase() + '<br>';
                         break;
                     case 'substring':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var str = parts[1];
                             var start = parseInt(parts[2]);
@@ -191,7 +191,7 @@
                         }
                         break;
                     case 'replace':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 4) {
                             var str = parts[1];
                             var search = parts[2];
@@ -202,7 +202,7 @@
                         }
                         break;
                     case 'concat':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var str1 = parts[1];
                             var str2 = parts[2];
@@ -212,7 +212,7 @@
                         }
                         break;
                     case 'add':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -222,7 +222,7 @@
                         }
                         break;
                     case 'subtract':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -232,7 +232,7 @@
                         }
                         break;
                     case 'multiply':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -242,7 +242,7 @@
                         }
                         break;
                     case 'divide':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -256,7 +256,7 @@
                         }
                         break;
                     case 'sqrt':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var num = parseFloat(parts[1]);
                             if (num >= 0) {
@@ -269,7 +269,7 @@
                         }
                         break;
                     case 'pow':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var base = parseFloat(parts[1]);
                             var exponent = parseFloat(parts[2]);
@@ -279,7 +279,7 @@
                         }
                         break;
                     case 'round':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var num = parseFloat(parts[1]);
                             output.innerHTML += Math.round(num) + '<br>';
@@ -288,7 +288,7 @@
                         }
                         break;
                     case 'ceil':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var num = parseFloat(parts[1]);
                             output.innerHTML += Math.ceil(num) + '<br>';
@@ -297,7 +297,7 @@
                         }
                         break;
                     case 'floor':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var num = parseFloat(parts[1]);
                             output.innerHTML += Math.floor(num) + '<br>';
@@ -306,7 +306,7 @@
                         }
                         break;
                     case 'max':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -316,7 +316,7 @@
                         }
                         break;
                     case 'min':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 3) {
                             var num1 = parseFloat(parts[1]);
                             var num2 = parseFloat(parts[2]);
@@ -326,7 +326,7 @@
                         }
                         break;
                     case 'open':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var url = parts[1];
                             window.open(url);
@@ -338,7 +338,7 @@
                         window.close();
                         break;
                     case 'push':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length >= 3) {
                             var arrayName = parts[1];
                             var elements = parts.slice(2);
@@ -353,7 +353,7 @@
                         }
                         break;
                     case 'pop':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var arrayName = parts[1];
                             if (arrayName in window && Array.isArray(window[arrayName])) {
@@ -367,7 +367,7 @@
                         }
                         break;
                     case 'shift':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 2) {
                             var arrayName = parts[1];
                             if (arrayName in window && Array.isArray(window[arrayName])) {
@@ -381,7 +381,7 @@
                         }
                         break;
                     case 'unshift':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length >= 3) {
                             var arrayName = parts[1];
                             var elements = parts.slice(2);
@@ -396,7 +396,7 @@
                         }
                         break;
                     case 'slice':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length === 4) {
                             var arrayName = parts[1];
                             var start = parseInt(parts[2]);
@@ -412,7 +412,7 @@
                         }
                         break;
                     case 'splice':
-                        var parts = document.getElementById('command').value.split(' ');
+                        var parts = command.split(' ');
                         if (parts.length >= 4) {
                             var arrayName = parts[1];
                             var start = parseInt(parts[2]);
@@ -447,4 +447,3 @@
     </script>
 </body>
 </html>
-
