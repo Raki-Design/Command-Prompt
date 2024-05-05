@@ -15,20 +15,30 @@
             line-height: 1.5;
             padding: 10px;
         }
+        #command-container {
+            display: flex;
+            align-items: center;
+        }
+        #prompt {
+            margin-right: 5px;
+        }
         #command {
             background-color: #000;
             border: none;
             color: #0f0;
             outline: none;
-            width: 100%;
             padding: 10px;
             box-sizing: border-box;
+            flex: 1;
         }
     </style>
 </head>
 <body>
     <div id="output"></div>
-    <input type="text" id="command" onkeydown="if(event.key==='Enter') executeCommand()">
+    <div id="command-container">
+        <span id="prompt">$</span>
+        <input type="text" id="command" onkeypress="if(event.key==='Enter') executeCommand()">
+    </div>
 
     <script>
         var commands = {
@@ -87,7 +97,7 @@
         };
 
         function executeCommand() {
-            var command = document.getElementById('command').value;
+            var command = document.getElementById('command').value.toLowerCase();
             var output = document.getElementById('output');
 
             if (command in commands) {
@@ -166,277 +176,8 @@
                             output.innerHTML += cmd + ': ' + commands[cmd] + '<br>';
                         }
                         break;
-                    case 'length':
-                        output.innerHTML += document.getElementById('command').value.length + '<br>';
-                        break;
-                    case 'toUpperCase':
-                        output.innerHTML += document.getElementById('command').value.toUpperCase() + '<br>';
-                        break;
-                    case 'toLowerCase':
-                        output.innerHTML += document.getElementById('command').value.toLowerCase() + '<br>';
-                        break;
-                    case 'substring':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var str = parts[1];
-                            var start = parseInt(parts[2]);
-                            output.innerHTML += str.substring(start) + '<br>';
-                        } else if (parts.length === 4) {
-                            var str = parts[1];
-                            var start = parseInt(parts[2]);
-                            var end = parseInt(parts[3]);
-                            output.innerHTML += str.substring(start, end) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'replace':
-                        var parts = command.split(' ');
-                        if (parts.length === 4) {
-                            var str = parts[1];
-                            var search = parts[2];
-                            var replace = parts[3];
-                            output.innerHTML += str.replace(search, replace) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'concat':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var str1 = parts[1];
-                            var str2 = parts[2];
-                            output.innerHTML += str1.concat(str2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'add':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            output.innerHTML += (num1 + num2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'subtract':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            output.innerHTML += (num1 - num2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'multiply':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            output.innerHTML += (num1 * num2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'divide':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            if (num2 !== 0) {
-                                output.innerHTML += (num1 / num2) + '<br>';
-                            } else {
-                                output.innerHTML += 'Cannot divide by zero<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'sqrt':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var num = parseFloat(parts[1]);
-                            if (num >= 0) {
-                                output.innerHTML += Math.sqrt(num) + '<br>';
-                            } else {
-                                output.innerHTML += 'Invalid number (negative)<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'pow':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var base = parseFloat(parts[1]);
-                            var exponent = parseFloat(parts[2]);
-                            output.innerHTML += Math.pow(base, exponent) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'round':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var num = parseFloat(parts[1]);
-                            output.innerHTML += Math.round(num) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'ceil':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var num = parseFloat(parts[1]);
-                            output.innerHTML += Math.ceil(num) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'floor':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var num = parseFloat(parts[1]);
-                            output.innerHTML += Math.floor(num) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'max':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            output.innerHTML += Math.max(num1, num2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'min':
-                        var parts = command.split(' ');
-                        if (parts.length === 3) {
-                            var num1 = parseFloat(parts[1]);
-                            var num2 = parseFloat(parts[2]);
-                            output.innerHTML += Math.min(num1, num2) + '<br>';
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'open':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var url = parts[1];
-                            window.open(url);
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'close':
-                        window.close();
-                        break;
-                    case 'push':
-                        var parts = command.split(' ');
-                        if (parts.length >= 3) {
-                            var arrayName = parts[1];
-                            var elements = parts.slice(2);
-                            if (arrayName in window) {
-                                window[arrayName].push(...elements);
-                                output.innerHTML += 'Added ' + elements.join(', ') + ' to ' + arrayName + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'pop':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var arrayName = parts[1];
-                            if (arrayName in window && Array.isArray(window[arrayName])) {
-                                var popped = window[arrayName].pop();
-                                output.innerHTML += 'Removed ' + popped + ' from ' + arrayName + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'shift':
-                        var parts = command.split(' ');
-                        if (parts.length === 2) {
-                            var arrayName = parts[1];
-                            if (arrayName in window && Array.isArray(window[arrayName])) {
-                                var shifted = window[arrayName].shift();
-                                output.innerHTML += 'Removed ' + shifted + ' from ' + arrayName + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'unshift':
-                        var parts = command.split(' ');
-                        if (parts.length >= 3) {
-                            var arrayName = parts[1];
-                            var elements = parts.slice(2);
-                            if (arrayName in window) {
-                                window[arrayName].unshift(...elements);
-                                output.innerHTML += 'Added ' + elements.join(', ') + ' to the beginning of ' + arrayName + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'slice':
-                        var parts = command.split(' ');
-                        if (parts.length === 4) {
-                            var arrayName = parts[1];
-                            var start = parseInt(parts[2]);
-                            var end = parseInt(parts[3]);
-                            if (arrayName in window && Array.isArray(window[arrayName])) {
-                                var sliced = window[arrayName].slice(start, end);
-                                output.innerHTML += 'Sliced ' + arrayName + ': ' + sliced.join(', ') + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'splice':
-                        var parts = command.split(' ');
-                        if (parts.length >= 4) {
-                            var arrayName = parts[1];
-                            var start = parseInt(parts[2]);
-                            var deleteCount = parseInt(parts[3]);
-                            var elements = parts.slice(4);
-                            if (arrayName in window && Array.isArray(window[arrayName])) {
-                                var spliced = window[arrayName].splice(start, deleteCount, ...elements);
-                                output.innerHTML += 'Spliced ' + arrayName + ': ' + spliced.join(', ') + '<br>';
-                            } else {
-                                output.innerHTML += 'Array ' + arrayName + ' not found<br>';
-                            }
-                        } else {
-                            output.innerHTML += 'Invalid number of arguments<br>';
-                        }
-                        break;
-                    case 'history':
-                        output.innerHTML += JSON.stringify(window.history) + '<br>';
-                        break;
-                    case 'goBack':
-                        window.history.back();
-                        break;
-                    case 'goForward':
-                        window.history.forward();
-                        break;
+                    default:
+                        output.innerHTML += 'Command not implemented<br>';
                 }
             } else {
                 output.innerHTML += 'Unknown command: ' + command + '<br>';
@@ -444,11 +185,6 @@
 
             document.getElementById('command').value = '';
         }
-
-        // Handle button click event
-        document.getElementById('submitBtn').addEventListener('click', function() {
-            executeCommand();
-        });
     </script>
 </body>
 </html>
